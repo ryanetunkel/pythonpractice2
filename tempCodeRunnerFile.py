@@ -1,1 +1,0 @@
-assert(i_to_o(input_list) == output_list)
