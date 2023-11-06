@@ -73,7 +73,12 @@ import time
 
 
 # Changing the format of displayed messages
-logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-logging.debug('This message should appear on the console')
-logging.info('So should this')
-logging.warning('And this, too')
+# logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+# logging.debug('This message should appear on the console')
+# logging.info('So should this')
+# logging.warning('And this, too')
+
+
+# Dispalying date/time in messages
+# logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p') # %(asctime)s displays date and time of an event, datefmt formats the date
+# logging.warning('is when this event was logged.')
