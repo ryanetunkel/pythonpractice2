@@ -207,19 +207,67 @@ from cerberus import Validator
 # Serialization 
 # Cerberus schemas are built with vanilla Python types: dict, list, string, etc. Even user-defined validation rules are invoked in the schema by name as a string.
 # A useful side effect of this design is that schemas can be defined in a number of ways, for example with PyYAML.
-import yaml
+# import yaml
 
 
-v = Validator()
-schema_text = '''
-name:
-    type: string
-age:
-    type: integer
-    min: 10
-'''
-schema = yaml.safe_load(schema_text)
-document = {'name': 'Little Joe', 'age': 5}
-print(v.validate(document, schema))
+# v = Validator()
+# schema_text = '''
+# name:
+#     type: string
+# age:
+#     type: integer
+#     min: 10
+# '''
+# schema = yaml.safe_load(schema_text)
+# document = {'name': 'Little Joe', 'age': 5}
+# print(v.validate(document, schema))
 
-print(v.errors)
+# print(v.errors)
+
+# Can use json as well as yaml or another serializer as long as there is a decoder that can produce a nested dict.
+# That nested dict is what you used to define a schema
+# For populating and dumping one of hte registries, use extend() and all()
+
+# Validation Rules
+# allow_uknown
+# Can be used in conjunction with the schema(dict) rule when validating a mapping in order to set the allow_unkown property of the validator for the subdocument. 
+# This rule has precedence over purge_unknown
+
+# allowed
+# Takes a py3:collectionsabc.Container of allowed values. Valiodates the target calue if hte value is in the allowed values. 
+# If the target value is an iterable, all its members must be in the allowed values.
+
+# v = Validator()
+
+# v.schema = {'role': {'type': 'list', 'allowed': ['agent', 'client', 'supplier']}}
+# print(v.validate({'role': ['agent', 'supplier']}))
+
+# print(v.validate({'role': ['intern']}))
+
+# print(v.errors)
+
+# v.schema = {'role': {'type': 'string', 'allowed': ['agent', 'client', 'supplier']}}
+# print(v.validate({'role': 'supplier'}))
+
+# print(v.validate({'role': 'intern'}))
+
+# print(v.errors)
+
+# v.schema = {'a_restricted_integer': {'type': 'integer', 'allowed': [-1, 0, 1]}}
+# print(v.validate({'a_restricted_integer': 2}))
+
+# print(v.errors)
+
+# allof
+# Validates if ALL of the provided constraints validates the field - think AND
+# anyof
+# Validates if ANY of the provided constraints validates the field - think OR
+
+# check_with
+# Validates the value of a field by calling either a function or method
+# A function must be implmented like the following prototype:
+# pseudocode:
+# def functionname(field, value, error):
+#     if value is invalid:
+#         error(field, 'error message')
+
