@@ -1,6 +1,8 @@
-value = "   hi there my name is ryan   "
+from string import capwords
 
-if len(value.strip()) > 0:
-	value = " ".join([idx.title() for idx in value.strip().split(" ")])
+value = "   hi_my name is ryan   "
+
+if value.strip():
+            value = capwords(value)
 	
 print(value)
